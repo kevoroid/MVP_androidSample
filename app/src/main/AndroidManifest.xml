@@ -14,7 +14,7 @@
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
 		<activity android:name=".ui.BaseActivity" />
-		<activity android:name=".ui.main.MainActivity">
+		<activity android:name=".ui.main.MainActivity" android:configChanges="screenSize|screenLayout|orientation">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<action android:name="android.intent.action.VIEW" />
