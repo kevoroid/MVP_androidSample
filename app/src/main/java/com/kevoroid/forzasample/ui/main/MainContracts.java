@@ -15,12 +15,13 @@ public interface MainContracts {
 
 		void showErr();
 
-		void openTeamDetails();
+		void showTeams();
 
-		View getMainLayout();
+		void openTeamDetails();
 
 		void setupRecyclerView(List<Teams> data);
 
+		View getMainLayout();
 	}
 
 	interface Actions {

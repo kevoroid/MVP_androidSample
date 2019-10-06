@@ -36,7 +36,7 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 		progressDialog.setMessage(getString(R.string.label_please_wait));
 		progressDialog.setIndeterminate(true);
 
-		openTeamDetails();
+		showTeams();
 	}
 
 	@Override
@@ -55,13 +55,18 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 	}
 
 	@Override
-	public void openTeamDetails() {
+	public void showTeams() {
 		if (NetworkHandler.internetAvailable(this)) {
 			actions.fetchTeams();
 		} else {
 			hideLoading();
 			showErr();
 		}
+	}
+
+	@Override
+	public void openTeamDetails() {
+
 	}
 
 	@Override
