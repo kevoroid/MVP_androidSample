@@ -16,7 +16,7 @@ public class MainPresenter implements MainContracts.Actions, MasterRepo.MasterRe
 	private ApiEndpoints apiEndpoints = RetroMaster.getInstance().create(ApiEndpoints.class);
 	private MasterRepo masterRepo;
 
-	MainPresenter(@NonNull MainContracts.Views views) {
+	public MainPresenter(@NonNull MainContracts.Views views) {
 		this.views = views;
 		masterRepo = MasterRepo.getINSTANCE(this, apiEndpoints);
 	}
@@ -36,7 +36,6 @@ public class MainPresenter implements MainContracts.Actions, MasterRepo.MasterRe
 	@Override
 	public void onDataReturned(List<Teams> data) {
 		if (data != null) {
-			System.out.println("MainPresenter.onDataReturned List -- " + data);
 			views.setupRecyclerView(data);
 			views.hideLoading();
 		} else {
@@ -46,7 +45,6 @@ public class MainPresenter implements MainContracts.Actions, MasterRepo.MasterRe
 
 	@Override
 	public void onDataReturned(Team data) {
-		System.out.println("MainPresenter.onDataReturned Team -- " + data);
 		if (data != null) {
 			views.openTeamDetails(data);
 			views.hideLoading();

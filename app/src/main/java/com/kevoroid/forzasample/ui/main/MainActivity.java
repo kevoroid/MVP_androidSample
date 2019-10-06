@@ -42,7 +42,6 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 		progressDialog.setMessage(getString(R.string.label_please_wait));
 		progressDialog.setIndeterminate(true);
 
-		System.out.println("MainActivity.onCreate -------------");
 		showTeams();
 	}
 

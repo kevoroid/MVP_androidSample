@@ -33,9 +33,6 @@ public class MasterRepo {
 		repoApiEndpoints.fetchListOfTeams().enqueue(new Callback<List<Teams>>() {
 			@Override
 			public void onResponse(Call<List<Teams>> call, Response<List<Teams>> response) {
-				System.out.println("MasterRepo.onResponse --- " + response.isSuccessful());
-				System.out.println("response = " + response);
-				System.out.println("response = " + response.body());
 				if (response.isSuccessful()) {
 					callbacks.onDataReturned(response.body());
 				} else {
@@ -46,7 +43,6 @@ public class MasterRepo {
 			@Override
 			public void onFailure(Call<List<Teams>> call, Throwable t) {
 				if (BuildConfig.DEBUG) {
-					System.out.println("MasterRepo.onFailure fetchTeamsFromApi --- " + t.getLocalizedMessage());
 					t.printStackTrace();
 				}
 				callbacks.onDataError();
@@ -68,7 +64,6 @@ public class MasterRepo {
 			@Override
 			public void onFailure(Call<Team> call, Throwable t) {
 				if (BuildConfig.DEBUG) {
-					System.out.println("MasterRepo.onFailure fetchTeamDetail --- " + t.getLocalizedMessage());
 					t.printStackTrace();
 				}
 				callbacks.onDataError();
