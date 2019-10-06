@@ -17,7 +17,7 @@ public class MasterRepo {
 	private ApiEndpoints repoApiEndpoints;
 	private MasterRepoCallbacks callbacks;
 
-	public MasterRepo(MasterRepoCallbacks masterRepoCallbacks, ApiEndpoints apiEndpoints) {
+	private MasterRepo(MasterRepoCallbacks masterRepoCallbacks, ApiEndpoints apiEndpoints) {
 		this.callbacks = masterRepoCallbacks;
 		this.repoApiEndpoints = apiEndpoints;
 	}
