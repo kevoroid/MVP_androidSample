@@ -1,3 +1,4 @@
 <resources>
 	<string name="app_name">ForzaSample</string>
+	<string name="we_have_a_problem_err">Houston, we have a problem!</string>
 </resources>
