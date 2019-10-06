@@ -3,14 +3,20 @@ package com.kevoroid.forzasample.ui.main;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.kevoroid.forzasample.R;
+import com.kevoroid.forzasample.api.RetroMaster;
+import com.kevoroid.forzasample.models.Team;
 import com.kevoroid.forzasample.models.Teams;
 import com.kevoroid.forzasample.ui.BaseActivity;
 import com.kevoroid.forzasample.ui.main.adapters.MainAdapter;
 import com.kevoroid.forzasample.utils.NetworkHandler;
 import com.kevoroid.forzasample.utils.PromptHandler;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -36,11 +42,15 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 		progressDialog.setMessage(getString(R.string.label_please_wait));
 		progressDialog.setIndeterminate(true);
 
+		System.out.println("MainActivity.onCreate -------------");
 		showTeams();
 	}
 
-	private MainAdapter.RecyclerViewCallback recyclerViewCallback = id -> {
-		actions.fetchTeamDetail(id);
+	private MainAdapter.RecyclerViewCallback recyclerViewCallback = new MainAdapter.RecyclerViewCallback() {
+		@Override
+		public void showSelectedTeam(int id) {
+			actions.fetchTeamDetail(id);
+		}
 	};
 
 	@Override
@@ -69,8 +79,28 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 	}
 
 	@Override
-	public void openTeamDetails(int id) {
-		// show teams detail in bottom sheet!
+	public void openTeamDetails(Team data) {
+		View bottomSheetView = getLayoutInflater().inflate(R.layout.bottom_sheet_team_detail, null);
+		BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+		bottomSheetDialog.setContentView(bottomSheetView);
+
+		TextView teamName = (TextView) bottomSheetView.findViewById(R.id.team_detail_team_name);
+		TextView teamGender = (TextView) bottomSheetView.findViewById(R.id.team_detail_team_gender);
+		TextView teamRegion = (TextView) bottomSheetView.findViewById(R.id.team_detail_team_region);
+		TextView teamDesc = (TextView) bottomSheetView.findViewById(R.id.team_detail_team_desc);
+		ImageView teamBadge = (ImageView) bottomSheetView.findViewById(R.id.team_detail_team_badge);
+
+		teamName.setText(data.getName());
+		teamGender.setText(data.getGender());
+		if (data.getNational()) {
+			teamRegion.setText(R.string.label_national);
+		} else {
+			teamRegion.setText((R.string.label_club));
+		}
+		teamDesc.setText(data.getDescription());
+		Picasso.get().load(RetroMaster.getTeamBadgeUrl(data.getId())).into(teamBadge);
+
+		bottomSheetDialog.show();
 	}
 
 	@Override
@@ -80,8 +110,18 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 
 	@Override
 	public void setupRecyclerView(List<Teams> data) {
-		mAdapter = new MainAdapter(recyclerViewCallback, data);
-		recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-		recyclerView.setAdapter(mAdapter);
+		try {
+			mAdapter = new MainAdapter(recyclerViewCallback, data);
+			recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+			recyclerView.setAdapter(mAdapter);
+		} catch (Exception x) {
+			x.printStackTrace();
+		}
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		mAdapter = null;
 	}
 }

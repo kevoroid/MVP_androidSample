@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:orientation="vertical"
+	android:padding="22dp"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="80dp"
+		android:layout_gravity="center_vertical"
+		android:gravity="center_vertical"
+		android:orientation="horizontal">
+
+		<androidx.appcompat.widget.AppCompatTextView
+			android:id="@+id/team_detail_team_name"
+			android:layout_width="0dp"
+			android:layout_height="48dp"
+			android:layout_weight="1"
+			android:textStyle="bold"
+			android:textSize="18sp"
+			android:textColor="@color/black"
+			app:autoSizeTextType="uniform"
+			tools:text="NYC FC!" />
+
+		<ImageView
+			android:id="@+id/team_detail_team_badge"
+			android:layout_width="50dp"
+			android:layout_height="50dp"
+			tools:src="@drawable/ic_launcher_background" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:layout_marginBottom="8dp"
+		android:orientation="horizontal">
+
+		<androidx.appcompat.widget.AppCompatTextView
+			android:id="@+id/team_detail_team_gender"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="@color/black"
+			android:layout_marginTop="8dp"
+			android:layout_marginBottom="8dp"
+			android:textAllCaps="true"
+			tools:text="MALE" />
+
+		<androidx.appcompat.widget.AppCompatTextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:textColor="@color/black"
+			android:text="@string/dash" />
+
+		<androidx.appcompat.widget.AppCompatTextView
+			android:id="@+id/team_detail_team_region"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="8dp"
+			android:layout_marginBottom="8dp"
+			android:textColor="@color/black"
+			tools:text="Club!" />
+
+	</LinearLayout>
+
+	<androidx.appcompat.widget.AppCompatTextView
+		android:id="@+id/team_detail_team_desc"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="@color/gray"
+		tools:text="New York City Football Club is an American professional soccer club based in New York City that competes in Major League Soccer, the highest level of American soccer, as a member of the league's Eastern Conference. New York City played its first game in 2015, as the twentieth overall expansion team of the league!" />
+
+</LinearLayout>

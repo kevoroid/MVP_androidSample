@@ -1,6 +1,7 @@
 package com.kevoroid.forzasample.ui.main;
 
 import android.view.View;
+import com.kevoroid.forzasample.models.Team;
 import com.kevoroid.forzasample.models.Teams;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface MainContracts {
 
 		void showTeams();
 
-		void openTeamDetails(int id);
+		void openTeamDetails(Team data);
 
 		void setupRecyclerView(List<Teams> data);
 

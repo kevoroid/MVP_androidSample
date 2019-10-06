@@ -2,6 +2,7 @@ package com.kevoroid.forzasample.repo;
 
 import com.kevoroid.forzasample.BuildConfig;
 import com.kevoroid.forzasample.api.ApiEndpoints;
+import com.kevoroid.forzasample.models.Team;
 import com.kevoroid.forzasample.models.Teams;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,7 +46,29 @@ public class MasterRepo {
 			@Override
 			public void onFailure(Call<List<Teams>> call, Throwable t) {
 				if (BuildConfig.DEBUG) {
-					System.out.println("MasterRepo.onFailure --- " + t.getLocalizedMessage());
+					System.out.println("MasterRepo.onFailure fetchTeamsFromApi --- " + t.getLocalizedMessage());
+					t.printStackTrace();
+				}
+				callbacks.onDataError();
+			}
+		});
+	}
+
+	public void fetchTeamDetail(int id) {
+		repoApiEndpoints.fetchTeamDetail(id).enqueue(new Callback<Team>() {
+			@Override
+			public void onResponse(Call<Team> call, Response<Team> response) {
+				if (response.isSuccessful()) {
+					callbacks.onDataReturned(response.body());
+				} else {
+					callbacks.onDataError();
+				}
+			}
+
+			@Override
+			public void onFailure(Call<Team> call, Throwable t) {
+				if (BuildConfig.DEBUG) {
+					System.out.println("MasterRepo.onFailure fetchTeamDetail --- " + t.getLocalizedMessage());
 					t.printStackTrace();
 				}
 				callbacks.onDataError();
@@ -56,6 +79,8 @@ public class MasterRepo {
 	public interface MasterRepoCallbacks {
 
 		void onDataReturned(List<Teams> data);
+
+		void onDataReturned(Team data);
 
 		void onDataError();
 	}
