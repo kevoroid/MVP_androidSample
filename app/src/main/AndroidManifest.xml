@@ -14,6 +14,8 @@
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
 		<activity android:name=".ui.BaseActivity" />
+		<!-- Adding configChanges to protect against rotation! Would have used ViewModel if it was MVVM or
+		even using savedInstanceState, but for sake of simplicity and speed, using this! -->
 		<activity android:name=".ui.main.MainActivity" android:configChanges="screenSize|screenLayout|orientation">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
