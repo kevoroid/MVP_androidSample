@@ -8,16 +8,19 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.gson.Gson;
 import com.kevoroid.forzasample.R;
 import com.kevoroid.forzasample.api.RetroMaster;
 import com.kevoroid.forzasample.models.Team;
 import com.kevoroid.forzasample.models.Teams;
 import com.kevoroid.forzasample.ui.BaseActivity;
 import com.kevoroid.forzasample.ui.main.adapters.MainAdapter;
+import com.kevoroid.forzasample.utils.CacheData;
 import com.kevoroid.forzasample.utils.NetworkHandler;
 import com.kevoroid.forzasample.utils.PromptHandler;
 import com.squareup.picasso.Picasso;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends BaseActivity implements MainContracts.Views {
@@ -69,11 +72,19 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 
 	@Override
 	public void showTeams() {
-		if (NetworkHandler.internetAvailable(this)) {
-			actions.fetchTeams();
+		String cachedData = CacheData.getInstance().readTeamsFromCache();
+		if (cachedData != null) {
+			// read from cache instead! --- Cache will be deleted after 10 min!
+			Teams[] tt =  new Gson().fromJson(cachedData, Teams[].class);
+			List<Teams> teams = Arrays.asList(tt);
+			setupRecyclerView(teams);
 		} else {
-			hideLoading();
-			showErr();
+			if (NetworkHandler.internetAvailable(this)) {
+				actions.fetchTeams();
+			} else {
+				hideLoading();
+				showErr();
+			}
 		}
 	}
 

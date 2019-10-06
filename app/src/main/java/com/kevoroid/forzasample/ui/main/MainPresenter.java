@@ -1,11 +1,13 @@
 package com.kevoroid.forzasample.ui.main;
 
 import androidx.annotation.NonNull;
+import com.google.gson.Gson;
 import com.kevoroid.forzasample.api.ApiEndpoints;
 import com.kevoroid.forzasample.api.RetroMaster;
 import com.kevoroid.forzasample.models.Team;
 import com.kevoroid.forzasample.models.Teams;
 import com.kevoroid.forzasample.repo.MasterRepo;
+import com.kevoroid.forzasample.utils.CacheData;
 
 import java.util.List;
 
@@ -36,6 +38,7 @@ public class MainPresenter implements MainContracts.Actions, MasterRepo.MasterRe
 	@Override
 	public void onDataReturned(List<Teams> data) {
 		if (data != null) {
+			CacheData.getInstance().writeTeamsToData(new Gson().toJson(data, List.class));
 			views.setupRecyclerView(data);
 			views.hideLoading();
 		} else {
