@@ -98,7 +98,9 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 			teamRegion.setText((R.string.label_club));
 		}
 		teamDesc.setText(data.getDescription());
-		Picasso.get().load(RetroMaster.getTeamBadgeUrl(data.getId())).into(teamBadge);
+		if (data.getBadgeUrl() != null && !data.getBadgeUrl().isEmpty()) {
+			Picasso.get().load(RetroMaster.getTeamBadgeUrl(data.getId())).into(teamBadge);
+		}
 
 		bottomSheetDialog.show();
 	}
