@@ -15,6 +15,8 @@ public class CacheData {
 	private static CacheData INSTANCE;
 	private ForzaApplication forzaApplication;
 
+	private static final String TEAMS_CACHE_OBJECT_NAME = "teams.obj";
+
 	private CacheData() {
 		forzaApplication = new ForzaApplication();
 	}
@@ -28,7 +30,7 @@ public class CacheData {
 
 	public void writeTeamsToCache(Object object) {
 		try {
-			FileOutputStream fos = forzaApplication.getContext().openFileOutput("teams.obj", Context.MODE_PRIVATE);
+			FileOutputStream fos = forzaApplication.getContext().openFileOutput(TEAMS_CACHE_OBJECT_NAME, Context.MODE_PRIVATE);
 			ObjectOutputStream os = new ObjectOutputStream(fos);
 			os.writeObject(object);
 			os.close();
@@ -41,7 +43,7 @@ public class CacheData {
 	public String readTeamsFromCache() {
 		String teamsObject = null;
 		try {
-			File file = new File(forzaApplication.getContext().getFilesDir(), "teams.obj");
+			File file = new File(forzaApplication.getContext().getFilesDir(), TEAMS_CACHE_OBJECT_NAME);
 			if (file.exists()) {
 				Calendar time = Calendar.getInstance();
 				time.add(Calendar.MINUTE, -10);
@@ -51,7 +53,7 @@ public class CacheData {
 				}
 			}
 
-			FileInputStream fis = forzaApplication.getContext().openFileInput("teams.obj");
+			FileInputStream fis = forzaApplication.getContext().openFileInput(TEAMS_CACHE_OBJECT_NAME);
 			ObjectInputStream is = new ObjectInputStream(fis);
 			teamsObject = String.valueOf(is.readObject());
 			is.close();
