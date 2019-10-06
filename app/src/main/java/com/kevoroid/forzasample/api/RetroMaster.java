@@ -9,6 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetroMaster {
 
 	private static final String BASE_URL = "https://android-exam.s3-eu-west-1.amazonaws.com/";
+	private static final String BASE_IMAGE_URL = "https://android-exam.s3-eu-west-1.amazonaws.com/teams/";
 
 	RetroMaster() {
 	}
@@ -29,5 +30,9 @@ public class RetroMaster {
 			builder.addInterceptor(httpLoggingInterceptor);
 		}
 		return builder.build();
+	}
+
+	public static String getTeamBadgeUrl(int id) {
+		return BASE_IMAGE_URL + id + "/badge.png";
 	}
 }
