@@ -16,6 +16,7 @@ public class CacheData {
 	private ForzaApplication forzaApplication;
 
 	private static final String TEAMS_CACHE_OBJECT_NAME = "teams.obj";
+	private static final String TEAM_DETAIL_CACHE_OBJECT_NAME = "team_";
 
 	private CacheData() {
 		forzaApplication = new ForzaApplication();
@@ -63,5 +64,46 @@ public class CacheData {
 		}
 
 		return teamsObject;
+	}
+
+	public void writeTeamDetailToCache(Object object, int id) {
+		try {
+			FileOutputStream fos = forzaApplication.getContext().openFileOutput(getTeamDetailCacheFileName(id), Context.MODE_PRIVATE);
+			ObjectOutputStream os = new ObjectOutputStream(fos);
+			os.writeObject(object);
+			os.close();
+			fos.close();
+		} catch (Exception e) {
+			Log.d(TAG, "readFromCache: " + e.getLocalizedMessage());
+		}
+	}
+
+	public String readTeamDetailFromCache(int id) {
+		String teamDetailObject = null;
+		try {
+			File file = new File(forzaApplication.getContext().getFilesDir(), getTeamDetailCacheFileName(id));
+			if (file.exists()) {
+				Calendar time = Calendar.getInstance();
+				time.add(Calendar.MINUTE, -10);
+				Date lastModified = new Date(file.lastModified());
+				if (lastModified.before(time.getTime())) {
+					file.delete();
+				}
+			}
+
+			FileInputStream fis = forzaApplication.getContext().openFileInput(getTeamDetailCacheFileName(id));
+			ObjectInputStream is = new ObjectInputStream(fis);
+			teamDetailObject = String.valueOf(is.readObject());
+			is.close();
+			fis.close();
+		} catch (Exception e) {
+			Log.d(TAG, "readFromCache: " + e.getLocalizedMessage());
+		}
+
+		return teamDetailObject;
+	}
+
+	private String getTeamDetailCacheFileName(int id) {
+		return TEAM_DETAIL_CACHE_OBJECT_NAME + id + ".obj";
 	}
 }

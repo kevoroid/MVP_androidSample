@@ -51,7 +51,13 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 	private MainAdapter.RecyclerViewCallback recyclerViewCallback = new MainAdapter.RecyclerViewCallback() {
 		@Override
 		public void showSelectedTeam(int id) {
-			actions.fetchTeamDetail(id);
+			String cachedData = CacheData.getInstance().readTeamDetailFromCache(id);
+			if (cachedData != null) {
+				Team tt = new Gson().fromJson(cachedData, Team.class);
+				openTeamDetails(tt);
+			} else {
+				actions.fetchTeamDetail(id);
+			}
 		}
 	};
 
