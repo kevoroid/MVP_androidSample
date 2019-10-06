@@ -37,7 +37,7 @@ public class CacheData {
 			os.close();
 			fos.close();
 		} catch (Exception e) {
-			Log.d(TAG, "readFromCache: " + e.getLocalizedMessage());
+			Log.d(TAG, "writeTeamsToCache: " + e.getLocalizedMessage());
 		}
 	}
 
@@ -60,7 +60,7 @@ public class CacheData {
 			is.close();
 			fis.close();
 		} catch (Exception e) {
-			Log.d(TAG, "readFromCache: " + e.getLocalizedMessage());
+			Log.d(TAG, "readTeamsFromCache: " + e.getLocalizedMessage());
 		}
 
 		return teamsObject;
@@ -74,7 +74,7 @@ public class CacheData {
 			os.close();
 			fos.close();
 		} catch (Exception e) {
-			Log.d(TAG, "readFromCache: " + e.getLocalizedMessage());
+			Log.d(TAG, "writeTeamDetailToCache: " + e.getLocalizedMessage());
 		}
 	}
 
@@ -97,7 +97,7 @@ public class CacheData {
 			is.close();
 			fis.close();
 		} catch (Exception e) {
-			Log.d(TAG, "readFromCache: " + e.getLocalizedMessage());
+			Log.d(TAG, "readTeamDetailFromCache: " + e.getLocalizedMessage());
 		}
 
 		return teamDetailObject;
