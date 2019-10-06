@@ -38,7 +38,7 @@ public class MainPresenter implements MainContracts.Actions, MasterRepo.MasterRe
 	@Override
 	public void onDataReturned(List<Teams> data) {
 		if (data != null) {
-			CacheData.getInstance().writeTeamsToData(new Gson().toJson(data, List.class));
+			CacheData.getInstance().writeTeamsToCache(new Gson().toJson(data, List.class));
 			views.setupRecyclerView(data);
 			views.hideLoading();
 		} else {

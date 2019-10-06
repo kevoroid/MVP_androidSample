@@ -26,7 +26,7 @@ public class CacheData {
 		return INSTANCE;
 	}
 
-	public void writeTeamsToData(Object object) {
+	public void writeTeamsToCache(Object object) {
 		try {
 			FileOutputStream fos = forzaApplication.getContext().openFileOutput("teams.obj", Context.MODE_PRIVATE);
 			ObjectOutputStream os = new ObjectOutputStream(fos);
