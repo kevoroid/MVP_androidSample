@@ -1,5 +1,6 @@
 package com.kevoroid.forzasample.repo;
 
+import com.kevoroid.forzasample.BuildConfig;
 import com.kevoroid.forzasample.api.ApiEndpoints;
 import com.kevoroid.forzasample.models.Teams;
 import retrofit2.Call;
@@ -13,21 +14,21 @@ public class MasterRepo {
 	private static MasterRepo INSTANCE;
 
 	private ApiEndpoints repoApiEndpoints;
+	private MasterRepoCallbacks callbacks;
 
-	private List<Teams> data;
-
-	public MasterRepo(ApiEndpoints apiEndpoints) {
+	public MasterRepo(MasterRepoCallbacks masterRepoCallbacks, ApiEndpoints apiEndpoints) {
+		this.callbacks = masterRepoCallbacks;
 		this.repoApiEndpoints = apiEndpoints;
 	}
 
-	public static synchronized MasterRepo getINSTANCE(ApiEndpoints apiEndpoints) {
+	public static synchronized MasterRepo getINSTANCE(MasterRepoCallbacks masterRepoCallbacks, ApiEndpoints apiEndpoints) {
 		if (INSTANCE == null) {
-			INSTANCE = new MasterRepo(apiEndpoints);
+			INSTANCE = new MasterRepo(masterRepoCallbacks, apiEndpoints);
 		}
 		return INSTANCE;
 	}
 
-	public List<Teams> fetchTeamsFromApi() {
+	public void fetchTeamsFromApi() {
 		repoApiEndpoints.fetchListOfTeams().enqueue(new Callback<List<Teams>>() {
 			@Override
 			public void onResponse(Call<List<Teams>> call, Response<List<Teams>> response) {
@@ -35,19 +36,27 @@ public class MasterRepo {
 				System.out.println("response = " + response);
 				System.out.println("response = " + response.body());
 				if (response.isSuccessful()) {
-					data = response.body();
+					callbacks.onDataReturned(response.body());
 				} else {
-					// do something!
+					callbacks.onDataError();
 				}
 			}
 
 			@Override
 			public void onFailure(Call<List<Teams>> call, Throwable t) {
-				System.out.println("MasterRepo.onFailure --- " + t.getLocalizedMessage());
-				t.printStackTrace();
+				if (BuildConfig.DEBUG) {
+					System.out.println("MasterRepo.onFailure --- " + t.getLocalizedMessage());
+					t.printStackTrace();
+				}
+				callbacks.onDataError();
 			}
 		});
+	}
 
-		return data;
+	public interface MasterRepoCallbacks {
+
+		void onDataReturned(List<Teams> data);
+
+		void onDataError();
 	}
 }
