@@ -81,7 +81,7 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 		String cachedData = CacheData.getInstance().readTeamsFromCache();
 		if (cachedData != null) {
 			// read from cache instead! --- Cache will be deleted after 10 min!
-			Teams[] tt =  new Gson().fromJson(cachedData, Teams[].class);
+			Teams[] tt = new Gson().fromJson(cachedData, Teams[].class);
 			List<Teams> teams = Arrays.asList(tt);
 			setupRecyclerView(teams);
 		} else {
@@ -96,7 +96,7 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 
 	@Override
 	public void openTeamDetails(Team data) {
-		View bottomSheetView = getLayoutInflater().inflate(R.layout.bottom_sheet_team_detail, null);
+		View bottomSheetView = View.inflate(this, R.layout.bottom_sheet_team_detail, null);
 		BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
 		bottomSheetDialog.setContentView(bottomSheetView);
 
@@ -118,7 +118,11 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 			Picasso.get().load(RetroMaster.getTeamBadgeUrl(data.getId())).into(teamBadge);
 		}
 
-		bottomSheetDialog.show();
+		try {
+			bottomSheetDialog.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
