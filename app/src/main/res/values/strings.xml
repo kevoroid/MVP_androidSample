@@ -1,4 +1,8 @@
 <resources>
 	<string name="app_name">ForzaSample</string>
 	<string name="we_have_a_problem_err">Houston, we have a problem!</string>
+	<string name="dash">-</string>
+	<string name="label_national">National team!</string>
+	<string name="label_club">Club!</string>
+	<string name="label_please_wait">Please wait...</string>
 </resources>

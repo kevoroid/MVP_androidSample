@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/teams_row_cardview"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:clickable="true"
+	android:focusable="true"
+	android:layout_marginTop="8dp"
+	android:layout_marginLeft="16dp"
+	android:layout_marginRight="16dp"
+	android:layout_marginBottom="8dp"
+	android:foreground="?android:attr/selectableItemBackground"
+	app:cardCornerRadius="4dp"
+	app:cardElevation="4dp">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<androidx.appcompat.widget.AppCompatTextView
+			android:id="@+id/teams_row_team_name"
+			android:layout_width="match_parent"
+			android:layout_height="48dp"
+			android:textStyle="bold"
+			android:textSize="18sp"
+			android:layout_marginTop="8dp"
+			android:layout_marginLeft="16dp"
+			android:layout_marginRight="16dp"
+			app:autoSizeTextType="uniform"
+			tools:text="NYC FC!" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginLeft="16dp"
+			android:layout_marginRight="16dp"
+			android:layout_marginBottom="8dp"
+			android:orientation="horizontal">
+
+			<androidx.appcompat.widget.AppCompatTextView
+				android:id="@+id/teams_row_team_gender"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="8dp"
+				android:textAllCaps="true"
+				tools:text="MALE" />
+
+			<androidx.appcompat.widget.AppCompatTextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="8dp"
+				android:text="@string/dash" />
+
+			<androidx.appcompat.widget.AppCompatTextView
+				android:id="@+id/teams_row_team_region"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="8dp"
+				tools:text="Club!" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</androidx.cardview.widget.CardView>
