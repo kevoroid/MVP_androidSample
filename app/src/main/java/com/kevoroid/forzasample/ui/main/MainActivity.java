@@ -39,6 +39,10 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 		showTeams();
 	}
 
+	private MainAdapter.RecyclerViewCallback recyclerViewCallback = id -> {
+		actions.fetchTeamDetail(id);
+	};
+
 	@Override
 	public void showLoading() {
 		progressDialog.show();
@@ -65,8 +69,8 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 	}
 
 	@Override
-	public void openTeamDetails() {
-
+	public void openTeamDetails(int id) {
+		// show teams detail in bottom sheet!
 	}
 
 	@Override
@@ -76,7 +80,7 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 
 	@Override
 	public void setupRecyclerView(List<Teams> data) {
-		mAdapter = new MainAdapter(data);
+		mAdapter = new MainAdapter(recyclerViewCallback, data);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 		recyclerView.setAdapter(mAdapter);
 	}

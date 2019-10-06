@@ -17,7 +17,7 @@ public interface MainContracts {
 
 		void showTeams();
 
-		void openTeamDetails();
+		void openTeamDetails(int id);
 
 		void setupRecyclerView(List<Teams> data);
 
@@ -27,6 +27,8 @@ public interface MainContracts {
 	interface Actions {
 
 		void fetchTeams();
+
+		void fetchTeamDetail(int id);
 
 	}
 }

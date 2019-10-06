@@ -14,9 +14,11 @@ import java.util.List;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder> {
 
+	private RecyclerViewCallback recyclerViewCallback;
 	private List<Teams> teams;
 
-	public MainAdapter(List<Teams> teams) {
+	public MainAdapter(RecyclerViewCallback recyclerViewCallback, List<Teams> teams) {
+		this.recyclerViewCallback = recyclerViewCallback;
 		this.teams = teams;
 	}
 
@@ -37,6 +39,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 			} else {
 				holder.teamRegion.setText((R.string.label_club));
 			}
+
+			holder.itemView.setOnClickListener(v -> {
+				recyclerViewCallback.showSelectedTeam(teams.get(position).getId());
+			});
 		} catch (Exception e) {
 			if (BuildConfig.DEBUG) {
 				e.printStackTrace();
@@ -49,7 +55,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 		return teams.size();
 	}
 
-	static class MainViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+	static class MainViewHolder extends RecyclerView.ViewHolder {
 
 		TextView teamName;
 		TextView teamGender;
@@ -63,12 +69,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 			teamRegion = itemView.findViewById(R.id.teams_row_team_region);
 
 			itemView.setTag(this);
-			itemView.setOnClickListener(this);
 		}
+	}
 
-		@Override
-		public void onClick(View v) {
-			//
-		}
+	public interface RecyclerViewCallback {
+
+		void showSelectedTeam(int id);
 	}
 }

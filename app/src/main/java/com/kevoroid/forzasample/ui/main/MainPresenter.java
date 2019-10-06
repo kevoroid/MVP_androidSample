@@ -15,7 +15,7 @@ public class MainPresenter implements MainContracts.Actions, MasterRepo.MasterRe
 	private ApiEndpoints apiEndpoints = RetroMaster.getInstance().create(ApiEndpoints.class);
 	private MasterRepo masterRepo;
 
-	public MainPresenter(@NonNull MainContracts.Views views) {
+	MainPresenter(@NonNull MainContracts.Views views) {
 		this.views = views;
 		masterRepo = MasterRepo.getINSTANCE(this, apiEndpoints);
 	}
@@ -27,13 +27,18 @@ public class MainPresenter implements MainContracts.Actions, MasterRepo.MasterRe
 	}
 
 	@Override
+	public void fetchTeamDetail(int id) {
+		views.showLoading();
+		// fetch team details via repo!
+	}
+
+	@Override
 	public void onDataReturned(List<Teams> data) {
 		if (data != null) {
 			views.setupRecyclerView(data);
 			views.hideLoading();
 		} else {
-			views.hideLoading();
-			views.showErr();
+			onDataError();
 		}
 	}
 
@@ -42,4 +47,6 @@ public class MainPresenter implements MainContracts.Actions, MasterRepo.MasterRe
 		views.hideLoading();
 		views.showErr();
 	}
+
+
 }
