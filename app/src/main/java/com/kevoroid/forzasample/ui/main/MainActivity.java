@@ -76,6 +76,7 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 
 	@Override
 	public void showErr() {
+		hideLoading();
 		PromptHandler.showErrSnackBar(getMainLayout(), this);
 	}
 
@@ -120,6 +121,7 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 		try {
 			bottomSheetDialog.show();
 		} catch (Exception e) {
+			showErr();
 			e.printStackTrace();
 		}
 	}
@@ -138,11 +140,5 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 		} catch (Exception x) {
 			x.printStackTrace();
 		}
-	}
-
-	@Override
-	protected void onStop() {
-		super.onStop();
-		mAdapter = null;
 	}
 }
