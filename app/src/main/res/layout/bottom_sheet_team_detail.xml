@@ -21,7 +21,6 @@
 			android:layout_weight="1"
 			android:textStyle="bold"
 			android:textSize="18sp"
-			android:textColor="@color/black"
 			app:autoSizeTextType="uniform"
 			tools:text="NYC FC!" />
 
@@ -44,7 +43,6 @@
 			android:id="@+id/team_detail_team_gender"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:textColor="@color/black"
 			android:layout_marginTop="8dp"
 			android:layout_marginBottom="8dp"
 			android:textAllCaps="true"
@@ -54,7 +52,6 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_margin="8dp"
-			android:textColor="@color/black"
 			android:text="@string/dash" />
 
 		<androidx.appcompat.widget.AppCompatTextView
@@ -63,7 +60,6 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="8dp"
 			android:layout_marginBottom="8dp"
-			android:textColor="@color/black"
 			tools:text="Club!" />
 
 	</LinearLayout>
