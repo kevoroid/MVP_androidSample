@@ -61,7 +61,6 @@ public class BasicUnitTests {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("BasicUnitTests.returnResourcesTeamsData >>  " + byteArrayOutputStream.toString());
 		return byteArrayOutputStream.toString();
 	}
 
@@ -70,6 +69,7 @@ public class BasicUnitTests {
 		Type collectionType = new TypeToken<Collection<Teams>>(){}.getType();
 		List<Teams> teams = new Gson().fromJson(returnResourcesTeamsData(), collectionType);
 
+		Assert.assertEquals(teams.size(), 5);
 		Assert.assertEquals(teams.get(0).getName(), "Arsenal FC");
 		Assert.assertEquals(teams.get(2).getGender(), "female");
 		Assert.assertEquals(NationalTeamHandler.isNationalOrClub(teams.get(2).getNational()), R.string.label_national);
