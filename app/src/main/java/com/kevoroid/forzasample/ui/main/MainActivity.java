@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.kevoroid.forzasample.R;
 import com.kevoroid.forzasample.api.RetroMaster;
 import com.kevoroid.forzasample.models.Team;
@@ -20,7 +21,8 @@ import com.kevoroid.forzasample.utils.NetworkHandler;
 import com.kevoroid.forzasample.utils.PromptHandler;
 import com.squareup.picasso.Picasso;
 
-import java.util.Arrays;
+import java.lang.reflect.Type;
+import java.util.Collection;
 import java.util.List;
 
 public class MainActivity extends BaseActivity implements MainContracts.Views {
@@ -81,9 +83,9 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 		String cachedData = CacheData.getInstance().readTeamsFromCache();
 		if (cachedData != null) {
 			// read from cache instead! --- Cache will be deleted after 10 min!
-			Teams[] tt = new Gson().fromJson(cachedData, Teams[].class);
-			List<Teams> teams = Arrays.asList(tt);
-			setupRecyclerView(teams);
+			Type collectionType = new TypeToken<Collection<Teams>>(){}.getType();
+			Collection<Teams> teams = new Gson().fromJson(cachedData, collectionType);
+			setupRecyclerView((List<Teams>) teams);
 		} else {
 			if (NetworkHandler.internetAvailable(this)) {
 				actions.fetchTeams();
