@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.kevoroid.forzasample.BuildConfig;
 import com.kevoroid.forzasample.R;
 import com.kevoroid.forzasample.models.Teams;
+import com.kevoroid.forzasample.utils.NationalTeamHandler;
 
 import java.util.List;
 
@@ -34,11 +35,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 		try {
 			holder.teamName.setText(teams.get(position).getName());
 			holder.teamGender.setText(teams.get(position).getGender());
-			if (teams.get(position).getNational()) {
-				holder.teamRegion.setText(R.string.label_national);
-			} else {
-				holder.teamRegion.setText((R.string.label_club));
-			}
+			holder.teamRegion.setText(NationalTeamHandler.isNationalOrClub(teams.get(position).getNational()));
 
 			holder.itemView.setOnClickListener(v -> {
 				recyclerViewCallback.showSelectedTeam(teams.get(position).getId());

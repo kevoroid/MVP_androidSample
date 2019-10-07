@@ -17,6 +17,7 @@ import com.kevoroid.forzasample.models.Teams;
 import com.kevoroid.forzasample.ui.BaseActivity;
 import com.kevoroid.forzasample.ui.main.adapters.MainAdapter;
 import com.kevoroid.forzasample.utils.CacheData;
+import com.kevoroid.forzasample.utils.NationalTeamHandler;
 import com.kevoroid.forzasample.utils.NetworkHandler;
 import com.kevoroid.forzasample.utils.PromptHandler;
 import com.squareup.picasso.Picasso;
@@ -110,11 +111,7 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 
 		teamName.setText(data.getName());
 		teamGender.setText(data.getGender());
-		if (data.getNational()) {
-			teamRegion.setText(R.string.label_national);
-		} else {
-			teamRegion.setText((R.string.label_club));
-		}
+		teamRegion.setText(NationalTeamHandler.isNationalOrClub(data.getNational()));
 		teamDesc.setText(data.getDescription());
 		if (data.getBadgeUrl() != null && !data.getBadgeUrl().isEmpty()) {
 			Picasso.get().load(RetroMaster.getTeamBadgeUrl(data.getId())).into(teamBadge);
