@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "gender": "male",
+    "national": false,
+    "name": "Arsenal FC"
+  },
+  {
+    "id": 2,
+    "gender": "male",
+    "national": false,
+    "name": "FC Barcelona"
+  },
+  {
+    "id": 3,
+    "gender": "female",
+    "national": true,
+    "name": "Sweden"
+  },
+  {
+    "id": 4,
+    "gender": "male",
+    "national": false,
+    "name": "Inter Milan"
+  },
+  {
+    "id": 5,
+    "gender": "female",
+    "national": false,
+    "name": "Olympique Lyonnais"
+  }
+]
