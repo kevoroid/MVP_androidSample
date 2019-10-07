@@ -84,8 +84,8 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 		if (cachedData != null) {
 			// read from cache instead! --- Cache will be deleted after 10 min!
 			Type collectionType = new TypeToken<Collection<Teams>>(){}.getType();
-			Collection<Teams> teams = new Gson().fromJson(cachedData, collectionType);
-			setupRecyclerView((List<Teams>) teams);
+			List<Teams> teams = new Gson().fromJson(cachedData, collectionType);
+			setupRecyclerView(teams);
 		} else {
 			if (NetworkHandler.internetAvailable(this)) {
 				actions.fetchTeams();
