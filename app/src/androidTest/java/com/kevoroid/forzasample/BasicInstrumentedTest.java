@@ -16,8 +16,7 @@ import org.junit.runner.RunWith;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.matcher.ViewMatchers.*;
 import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
@@ -35,6 +34,10 @@ public class BasicInstrumentedTest {
 	public void testListOfTeams() {
 		onView(withId(R.id.main_activity_recyclerview))
 				.inRoot(RootMatchers.withDecorView(Matchers.is(activityRule.getActivity().getWindow().getDecorView())))
-				.perform(RecyclerViewActions.actionOnItemAtPosition(3, click()));
+				.perform(RecyclerViewActions.actionOnItemAtPosition(2, click()));
+
+		onView(withId(R.id.team_detail_team_name)).check(matches(isDisplayed()));
+		onView(withText("Sweden")).check(matches(isDisplayed()));
+		onView(withText("National team!")).check(matches(withText(R.string.label_national)));
 	}
 }
