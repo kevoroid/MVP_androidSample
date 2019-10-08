@@ -63,5 +63,8 @@ public class MainPresenter implements MainContracts.Actions, MasterRepo.MasterRe
 		views.showErr();
 	}
 
-
+	@Override
+	public void cleanup() {
+		masterRepo.cleanup();
+	}
 }

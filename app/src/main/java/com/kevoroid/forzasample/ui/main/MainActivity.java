@@ -142,4 +142,15 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 			x.printStackTrace();
 		}
 	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		actions.cleanup();
+	}
 }

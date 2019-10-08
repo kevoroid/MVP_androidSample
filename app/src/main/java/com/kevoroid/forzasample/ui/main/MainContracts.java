@@ -31,5 +31,7 @@ public interface MainContracts {
 
 		void fetchTeamDetail(int id);
 
+		void cleanup();
+
 	}
 }

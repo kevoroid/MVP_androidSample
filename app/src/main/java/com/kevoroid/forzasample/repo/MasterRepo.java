@@ -71,6 +71,11 @@ public class MasterRepo {
 		});
 	}
 
+	public void cleanup() {
+		INSTANCE = null;
+		callbacks = null;
+	}
+
 	public interface MasterRepoCallbacks {
 
 		void onDataReturned(List<Teams> data);
