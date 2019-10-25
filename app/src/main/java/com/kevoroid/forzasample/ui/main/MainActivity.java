@@ -26,14 +26,14 @@ import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.List;
 
-public class MainActivity extends BaseActivity implements MainContracts.Views {
+public class MainActivity extends BaseActivity implements MainContracts.Views, MainAdapter.RecyclerViewCallback {
 
 	private MainContracts.Actions actions;
 
 	private RecyclerView recyclerView;
 	private RecyclerView.Adapter mAdapter;
 
-	// I know its deprecated but for sake of simplicity!
+	// I know its deprecated and better to use Progressbar but for sake of simplicity!
 	private ProgressDialog progressDialog;
 
 	@Override
@@ -52,19 +52,6 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 		showTeams();
 	}
 
-	private MainAdapter.RecyclerViewCallback recyclerViewCallback = new MainAdapter.RecyclerViewCallback() {
-		@Override
-		public void showSelectedTeam(int id) {
-			String cachedData = CacheData.getInstance().readTeamDetailFromCache(id);
-			if (cachedData != null) {
-				Team tt = new Gson().fromJson(cachedData, Team.class);
-				openTeamDetails(tt);
-			} else {
-				actions.fetchTeamDetail(id);
-			}
-		}
-	};
-
 	@Override
 	public void showLoading() {
 		progressDialog.show();
@@ -79,6 +66,17 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 	public void showErr() {
 		hideLoading();
 		PromptHandler.showErrSnackBar(getMainLayout(), this);
+	}
+
+	@Override
+	public void showSelectedTeam(int id) {
+		String cachedData = CacheData.getInstance().readTeamDetailFromCache(id);
+		if (cachedData != null) {
+			Team tt = new Gson().fromJson(cachedData, Team.class);
+			openTeamDetails(tt);
+		} else {
+			actions.fetchTeamDetail(id);
+		}
 	}
 
 	@Override
@@ -135,7 +133,7 @@ public class MainActivity extends BaseActivity implements MainContracts.Views {
 	@Override
 	public void setupRecyclerView(List<Teams> data) {
 		try {
-			mAdapter = new MainAdapter(recyclerViewCallback, data);
+			mAdapter = new MainAdapter(this, data);
 			recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 			recyclerView.setAdapter(mAdapter);
 		} catch (Exception x) {
