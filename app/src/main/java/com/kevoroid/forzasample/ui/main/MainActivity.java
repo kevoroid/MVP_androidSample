@@ -135,6 +135,7 @@ public class MainActivity extends BaseActivity implements MainContracts.Views, M
 		try {
 			mAdapter = new MainAdapter(this, data);
 			recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+			recyclerView.setHasFixedSize(true);
 			recyclerView.setAdapter(mAdapter);
 		} catch (Exception x) {
 			x.printStackTrace();

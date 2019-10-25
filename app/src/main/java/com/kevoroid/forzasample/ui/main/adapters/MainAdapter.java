@@ -13,6 +13,7 @@ import com.kevoroid.forzasample.utils.NationalTeamHandler;
 
 import java.util.List;
 
+// Using old-fashion RecyclerView.Adapter<ViewHolder> instead of ListAdapter + DiffUtil for sake of this test!
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder> {
 
 	private RecyclerViewCallback recyclerViewCallback;
@@ -69,6 +70,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 		}
 	}
 
+	@FunctionalInterface
 	public interface RecyclerViewCallback {
 
 		void showSelectedTeam(int id);
