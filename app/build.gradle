@@ -7,7 +7,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName "1.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -30,22 +30,18 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.1.0'
     //implementation 'androidx.constraintlayout:constraintlayout:1.1.2' -- Dont need ConstraintLayout for now!
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
-    implementation 'com.google.android.material:material:1.1.0-alpha10'
-
+    implementation 'com.google.android.material:material:1.1.0-beta01'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.4.2'
     implementation 'com.squareup.retrofit2:retrofit:2.2.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
-
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-beta-3'
-
     implementation 'com.squareup.picasso:picasso:2.71828'
-
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-beta-3'
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:3.0.0'
     androidTestImplementation 'androidx.test:core:1.2.0'
