@@ -5,7 +5,7 @@ import android.content.Context;
 
 public class ForzaApplication extends Application {
 
-	private static Context mContext;
+	private Context mContext;
 
 	@Override
 	public void onCreate() {
